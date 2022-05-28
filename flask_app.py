@@ -1,3 +1,4 @@
+from logging import exception
 from flask import render_template, request, redirect, session, url_for, flash, g, send_from_directory, Flask
 from forms import RegisterForm, LoginForm, DonorDetailsForm
 from datetime import timedelta
@@ -87,7 +88,8 @@ def login():
             session['logged_in'] = True
             sumessage = "Successfully logged in"
             return redirect(url_for("account_page"))
-        except:
+        except Exception as e:
+            print(e)
             message = "Invalid email or password.Try again"
     return render_template("login.html", form=login_form, ermessage=message, sumessage=sumessage, pass_error=passerror)
 
@@ -130,7 +132,7 @@ def account_page():
             category = details.val()
     donor_form = DonorDetailsForm()
     if request.method == "POST":
-        if category == "Donor":
+        if category == "Employee":
             if donor_form.validate_on_submit():
                 info = dict()  # must include getting all the info and adding to the database
                 info["Employee name"] = donor_form.name.data
@@ -147,13 +149,13 @@ def account_page():
             db.child("Data").child(key).update({"Approval": "Approved"})
         return redirect(url_for('account_page'))
 
-    if category == "Donor":
+    if category == "Employee":
         l = get_individual_donor_list(session['email'])
-        return render_template("donor.html",user=session['email'], data=l, form=donor_form)
+        return render_template("employee.html",user=session['email'], data=l, form=donor_form)
     else:
         donor_list = get_complete_donor_list()
         distributor_list = get_individual_distributor_list(session['email'])
-        return render_template("distributor.html", user=session['email'] ,donor_list=donor_list, distributor_list=distributor_list)
+        return render_template("manager.html", user=session['email'] ,donor_list=donor_list, distributor_list=distributor_list)
 
 
 @app.route("/logout", methods=["POST", "GET"])
