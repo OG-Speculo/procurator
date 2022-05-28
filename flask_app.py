@@ -1,3 +1,4 @@
+from imp import reload
 from logging import exception
 from flask import render_template, request, redirect, session, url_for, flash, g, send_from_directory, Flask
 from forms import RegisterForm, LoginForm, DonorDetailsForm
@@ -136,8 +137,6 @@ def account_page():
             if donor_form.validate_on_submit():
                 info = dict()  # must include getting all the info and adding to the database
                 info["Employee name"] = donor_form.name.data
-                info["Designation"] = donor_form.designation.data
-                info["Contact details"] = donor_form.contact.data
                 info["Work Done"] = donor_form.work.data
                 info["No of hours"] = donor_form.hours.data
                 info["Employee mail"] = session['email']
@@ -182,4 +181,4 @@ def before_request():
         g.user = session['logged_in']
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

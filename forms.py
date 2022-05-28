@@ -20,8 +20,6 @@ class RegisterForm(FlaskForm):
 
 class DonorDetailsForm(FlaskForm):
     name = StringField(label='Name:', validators=[Length(max=30), DataRequired()])
-    designation = StringField(label='Designation', validators=[Length(max=200), DataRequired()])
-    contact = StringField(label='Contact', validators=[DataRequired()])
     work = StringField(label='Work Done', validators=[Length(max=50), DataRequired()])
     hours = IntegerField(label="No. of Hours", validators=[Length(max=24), DataRequired()])
     submit = SubmitField(label='submit')
