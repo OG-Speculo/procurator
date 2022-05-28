@@ -12,7 +12,7 @@
 </head>
  <nav class="navbar navbar-expand-md navbar-dark" style="background-color:#35363A;opacity:0.5;">
         <div class="container-fluid">
-          <a href="{{ url_for( 'index') }}" class="navbar-brand nav-heading" style='color:white;font-size:2rem;font-family: "Fauna One", Serif;'>Vitaran</a>
+          <a href="{{ url_for( 'index') }}" class="navbar-brand nav-heading" style='color:white;font-size:2rem;font-family: "Fauna One", Serif;'>Procurator</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -163,14 +163,14 @@ thead,tbody{
 <body>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-<h1 style="text-align:center;margin-top:5rem;margin-bottom:5rem;" >Your data</h1>
+<h1 style="text-align:center;margin-top:5rem;margin-bottom:5rem;" >Employee Data</h1>
   <div style="margin:2rem;">
     <table class="table table-striped">
   <thead class="thead-dark">
     <tr>
         <th scope="col">S.no</th>
         <th scope="col">Employee Name</th>
-        <th scope="col">Designation</th>
+        <th scope="col">Employee email</th>
         <th scope="col">Contact details</th>
         <th scope="col">No. of hours</th>
     </tr>
@@ -180,17 +180,15 @@ thead,tbody{
     <tr>
         <th scope="row">{{ i[-1] }}</th>
         <td>{{ i[0]["Employee name"] }}</td>
-        <td>{{ i[0]["Designation"] }}</td>
+        <td>{{ i[0]["Employee email"] }}</td>
         <td>{{ i[0]["Contact details"] }}</td>
-        <td>{{ i[0]["Work Done"] }}</td>
-        <td>{{ i[0]["No. of Hours"] }}</td>
-        <td style="color:green" >Verified</td>
+        <td>{{ i[0]["No of Hours"] }}</td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
   </div>
-<h1 style="text-align:center;margin-top:5rem;margin-bottom:5rem;" >Available to claim</h1>
+<h1 style="text-align:center;margin-top:5rem;margin-bottom:5rem;" >Yet to be Approved</h1>
   <div style="margin:2rem;">
 <table class="table table-striped">
   <thead class="thead-dark">

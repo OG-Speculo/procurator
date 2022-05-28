@@ -11,7 +11,7 @@
 </head>
 <nav class="navbar navbar-expand-md navbar-dark" style="background-color:#35363A;opacity:0.5;">
         <div class="container-fluid">
-          <a  href="{{ url_for( 'index') }}" class="navbar-brand nav-heading" style='color:white;font-size:2rem;font-family: "Fauna One", Serif;'>Vitaran</a>
+          <a  href="{{ url_for( 'index') }}" class="navbar-brand nav-heading" style='color:white;font-size:2rem;font-family: "Fauna One", Serif;'>Procurator</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -263,6 +263,7 @@ thead,tbody{
         <th scope="col">Contact details</th>
         <th scope="col">Work Done</th>
         <th scope="col">No.of Hours</th>
+        <th scope="col">Approval</th>
     </tr>
   </thead>
   <tbody>
@@ -274,6 +275,7 @@ thead,tbody{
         <td>{{ i[0]["Contact details"] }}</td>
         <td>{{ i[0]["Work Done"] }}</td>
         <td>{{ i[0]["No of Hours"] }}</td>
+        <td>{{ i[0]["Approval"] }}</td>
     </tr>
     {% endfor %}
   </tbody>
