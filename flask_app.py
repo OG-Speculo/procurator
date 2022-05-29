@@ -101,16 +101,6 @@ def get_name(email):
             if details.val()["Employee mail"] == email:
                 return details.val()["Employee name"]
 
-
-def update_hours(email,hours):
-    data_file = db.child("Data-1").get()
-    if (data_file.val() != None):
-        for details in data_file.each():
-            if details.val()["Employee mail"] == email:
-                prev_hours = details.val()["No of hours"]
-                db.child("Data-1").child(details.key()).update({"No of hours": int(prev_hours)+int(hours)})
-
-
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -189,18 +179,17 @@ def account_page():
         if category == "Employee":
             if donor_form.validate_on_submit():
                 info = dict()  # must include getting all the info and adding to the database
+                # info["Employee name"] = donor_form.name.data
+                # info["Designation"] = donor_form.designation.data
+                # info["Contact details"] = donor_form.contact.data
                 info["Work Done"] = donor_form.work.data
                 info["No of hours"] = donor_form.hours.data
                 info["Employee mail"] = session['email']
-                info["Employee name"] = session['name']
                 info["Manager mail"] = "manager@gmail.com"
                 info["Approval"] = "Not approved"
                 db.child("Data-2").push(info)
         else:
             key = request.form["key"]
-            hours = request.form['hours']
-            mail = db.child("Data-2").child(key).get().val()['Employee mail']
-            update_hours(mail, hours)
             db.child("Data-2").child(key).update({"Approval": "Approved"})
         return redirect(url_for('account_page'))
 
