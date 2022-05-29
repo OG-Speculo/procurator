@@ -14,6 +14,7 @@ class RegisterForm(FlaskForm):
     email_address = StringField(label='Email', validators=[Email(), DataRequired()])
     password = PasswordField(label='Password', validators=[Length(min=6), DataRequired()])
     confirm_password = PasswordField(label='Confirm Password', validators=[EqualTo('password'), DataRequired()])
+    name = StringField(label='Name', validators=[DataRequired()])
     radio_btn = RadioField(label="radio button", choices=[("Manager", "Manager"), ("Employee", "Employee")], default="Manager", validate_choice=[DataRequired()])
     submit = SubmitField(label='Register')
 

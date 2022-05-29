@@ -1,5 +1,3 @@
-from imp import reload
-from logging import exception
 from flask import render_template, request, redirect, session, url_for, flash, g, send_from_directory, Flask
 from forms import RegisterForm, LoginForm, DonorDetailsForm
 from datetime import timedelta
@@ -27,43 +25,81 @@ auth = firebase.auth()
 db = firebase.database()
 
 
-def get_individual_donor_list(email):
-    email = email.replace("~", "@").replace("`", ".")
+# def get_individual_donor_list(email):
+#     email = email.replace("~", "@").replace("`", ".")
+#     c = 1
+#     res = list()
+#     data_file = db.child("Data").get()
+#     if(data_file.val() != None):
+#         for details in data_file.each():
+#             if details.val()["Donor mail"] == email:
+#                 res.append([details.val(), c])
+#                 c += 1
+#     return res
+#
+#
+# def get_complete_donor_list():
+#     c = 1
+#     res = list()
+#     data_file = db.child("Data").get()
+#     if(data_file.val() != None):
+#         for details in data_file.each():
+#             if details.val()["Distributor mail"] == "Not claimed":
+#                 res.append([details.val(), details.key(), c])
+#                 c += 1
+#     return res
+#
+#
+# def get_individual_distributor_list(email):
+#     email = email.replace("~", "@").replace("`", ".")
+#     c = 1
+#     res = list()
+#     data_file = db.child("Data").get()
+#     if(data_file.val() != None):
+#         for details in data_file.each():
+#             if details.val()["Distributor mail"] == email:
+#                 res.append([details.val(), c])
+#                 c += 1
+#     return res
+
+def get_individual_employee_details(email):
     c = 1
     res = list()
-    data_file = db.child("Data").get()
+    data_file = db.child("Data-2").get()
     if(data_file.val() != None):
         for details in data_file.each():
-            if details.val()["Donor mail"] == email:
+            if details.val()["Employee mail"] == email:
                 res.append([details.val(), c])
                 c += 1
     return res
 
-
-def get_complete_donor_list():
+def get_complete_employee_list():
     c = 1
     res = list()
-    data_file = db.child("Data").get()
+    data_file = db.child("Data-2").get()
     if(data_file.val() != None):
         for details in data_file.each():
-            if details.val()["Distributor mail"] == "Not claimed":
+            if details.val()["Approval"] == "Not approved":
                 res.append([details.val(), details.key(), c])
                 c += 1
     return res
 
-
-def get_individual_distributor_list(email):
-    email = email.replace("~", "@").replace("`", ".")
+def get_individual_manager_list():
     c = 1
     res = list()
-    data_file = db.child("Data").get()
+    data_file = db.child("Data-1").get()
     if(data_file.val() != None):
         for details in data_file.each():
-            if details.val()["Distributor mail"] == email:
-                res.append([details.val(), c])
-                c += 1
+            res.append([details.val(), c])
+            c += 1
     return res
 
+def get_name(email):
+    data_file = db.child("Data-1").get()
+    if (data_file.val() != None):
+        for details in data_file.each():
+            if details.val()["Employee mail"] == email:
+                return details.val()["Employee name"]
 
 @app.route("/")
 def index():
@@ -87,10 +123,10 @@ def login():
             auth.sign_in_with_email_and_password(email, password)
             session['email'] = email
             session['logged_in'] = True
+            session['name'] = get_name(email)
             sumessage = "Successfully logged in"
             return redirect(url_for("account_page"))
-        except Exception as e:
-            print(e)
+        except:
             message = "Invalid email or password.Try again"
     return render_template("login.html", form=login_form, ermessage=message, sumessage=sumessage, pass_error=passerror)
 
@@ -106,15 +142,22 @@ def register():
     session.pop('logged_in', None)
     if register_form.validate_on_submit():
         try:
+            data = dict()
             email = register_form.email_address.data
+            data["Employee mail"] = email
             password = register_form.email_address.data
+            name = register_form.name.data
+            data["Employee name"] = name
+            data["No of hours"] = 0
             category = register_form.radio_btn.data
             auth.create_user_with_email_and_password(email, password)
             session['logged_in'] = True
             session['email'] = email
+            session['name'] = name
             message = "Successfully Registered"
             username = email.replace("@", "~").replace(".", "`")
             db.child("Category").update({username: category})
+            db.child("Data-1").push(data)
             return redirect(url_for("account_page"))
         except Exception as e:
             ermessage = e
@@ -136,24 +179,26 @@ def account_page():
         if category == "Employee":
             if donor_form.validate_on_submit():
                 info = dict()  # must include getting all the info and adding to the database
-                info["Employee name"] = donor_form.name.data
+                # info["Employee name"] = donor_form.name.data
+                # info["Designation"] = donor_form.designation.data
+                # info["Contact details"] = donor_form.contact.data
                 info["Work Done"] = donor_form.work.data
                 info["No of hours"] = donor_form.hours.data
                 info["Employee mail"] = session['email']
                 info["Manager mail"] = "manager@gmail.com"
                 info["Approval"] = "Not approved"
-                db.child("Data").push(info)
+                db.child("Data-2").push(info)
         else:
             key = request.form["key"]
-            db.child("Data").child(key).update({"Approval": "Approved"})
+            db.child("Data-2").child(key).update({"Approval": "Approved"})
         return redirect(url_for('account_page'))
 
     if category == "Employee":
-        l = get_individual_donor_list(session['email'])
+        l = get_individual_employee_details(session['email'])
         return render_template("employee.html",user=session['email'], data=l, form=donor_form)
     else:
-        donor_list = get_complete_donor_list()
-        distributor_list = get_individual_distributor_list(session['email'])
+        donor_list = get_complete_employee_list()
+        distributor_list = get_individual_manager_list()
         return render_template("manager.html", user=session['email'] ,donor_list=donor_list, distributor_list=distributor_list)
 
 
@@ -181,4 +226,4 @@ def before_request():
         g.user = session['logged_in']
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

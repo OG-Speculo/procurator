@@ -12,6 +12,11 @@
       <p class="or"><span>or</span></p>
 
       <div class="email-login">
+         <label> <b>Name</b></label>
+         {{ form.name(placeholder="Name") }}
+         {% for error in form.name.errors %}
+            <p style="color:red;" >{{ error }}</p>
+         {% endfor %}
          <label> <b>Email</b></label>
          {{ form.email_address(placeholder="Email Address") }}
          {% for error in form.email_address.errors %}
