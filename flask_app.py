@@ -127,8 +127,8 @@ def login():
     login_form = LoginForm()
     session.pop('logged_in', None)
     if login_form.validate_on_submit():
-        email = login_form.email.data
-        password = login_form.password.data
+        email = str(login_form.email.data)
+        password = str(login_form.password.data)
         try:
             auth.sign_in_with_email_and_password(email, password)
             session['email'] = email
