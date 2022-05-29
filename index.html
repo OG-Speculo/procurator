@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>PROCURATOR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel:700|Fauna+One" rel="stylesheet">
+
+  </head>
+
+  <body>
+    <!-- landing section -->
+    <section id="landing">
+
+      <nav class="navbar navbar-expand-md navbar-dark" style="background-color:#35363A;opacity:0.5;">
+        <div class="container-fluid">
+          <a href="{{ url_for( 'index') }}"  class="navbar-brand nav-heading">Procurator</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+              </li>
+            </ul>
+              <div style="float:right">
+                  <a href="{{ url_for('login') }}" class="nav-user">Login</a>
+              </div>
+            <div style="float:right">
+                  <a href="{{ url_for( 'register') }}" class="nav-user">Register</a>
+              </div>
+
+        </div>
+      </div>
+      </nav>
+
+
+      <div class="text-center tm-landing-text-container">
+        <div class="tm-landing-text-container-inner">
+            <h4 class="tm-landing-title">Procurator</h4>
+            <p class="tm-landing-subtitle">
+              Managing Employees, Effectively!
+            </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Introduction -->
+    <section id="introduction" class="tm-section-pad-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 imagecolumn">
+            <img src="https://i.ibb.co/31Ld6y4/Screenshot-2022-05-29-092623.png" alt="Screenshot-2022-05-29-092623" border="0"  class="img-fluid tm-intro-img" />
+          </div>
+          <div class="col-lg-6">
+            <div class="tm-intro-text-container">
+                <h2 class="tm-text-primary mb-4 tm-section-title">About Us</h2>
+                <p class="mb-4 tm-intro-text">
+                    Presenting Procurator, a website to keep a check on <strong>employee's work and working hours.</strong> <br>
+                    It is an one-stop solution for the managers which includes features like checking daily updates, etc.
+                    
+                </p>
+                </div>
+            </div>
+          </div>
+        </div>
+    </section>
+
+
+    <!-- Contact -->
+
+  <footer>
+      Copyright &copy; PROCURATOR 2022
+
+  </footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+  </body>
+
+<style>
+  html {
+  font-size: 18px;
+}
+
+a{
+text-decoration:none;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  transition: all 0.5s ease;
+  font-family: "Fauna One", Serif;
+}
+
+/* Navbar */
+.nav-heading {
+  font-size: 2.5rem;
+  margin: auto;
+}
+
+/* Landing */
+
+#landing {
+  /* background-image: url(https://wallpaper.dog/large/10723823.jpg); */
+  background-color: #161616;
+  /* background-repeat: no-repeat; */
+  min-height: 500px;
+  position: relative;
+  color: #ecdbba;
+}
+
+.tm-landing-text-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.tm-landing-text-container-inner {
+  margin-top: 200px;
+  margin-bottom: 150px;
+}
+
+.tm-landing-title {
+  font-size: 7rem;
+  color: #ecdbba;
+  font-family: "Cinzel", Cursive;
+}
+
+.tm-landing-subtitle {
+  font-size: 1.75rem;
+  margin-top: -25px;
+  font-weight: bold;
+  color: #346751;
+}
+
+@media (max-width: 770px) {
+  .tm-landing-title {
+    font-size: 8rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .tm-landing-title {
+    font-size: 4rem;
+  }
+
+  .tm-landing-subtitle {
+    font-size: 1.2rem;
+    margin-top: -15px;
+  }
+}
+@media (max-width: 350px) {
+  .tm-landing-title {
+    font-size: 2rem;
+  }
+
+  .tm-landing-subtitle {
+    font-size: 1rem;
+    margin-top: -10px;
+  }
+}
+
+/* Introduction */
+
+#introduction {
+  padding: 0;
+  background-color: #c84b31;
+  /* background-image: url(https://3248k42ykjj53w32471u2by9-wpengine.netdna-ssl.com/wp-content/uploads/2019/11/19208863_web1_PassingLaneJaffray-768x511.jpg);
+  background-repeat: no-repeat; */
+  color: #ecdbba;
+}
+
+.tm-section-title {
+  font-size: 2rem;
+  margin-top: -50px;
+  font-weight: bold;
+}
+
+.tm-intro-text {
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+.tm-intro-text-container {
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30%;
+  margin-bottom: 20%;
+}
+
+p {
+  line-height: 1.9;
+}
+
+.tm-intro-img {
+  max-width: 350px;
+}
+
+.imagecolumn {
+  text-align: center;
+  padding: 5%;
+}
+
+@media (max-width: 450px) {
+  .tm-section-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .tm-intro-img {
+    max-width: 200px;
+  }
+  .tm-intro-text {
+    font-size: 0.8rem;
+    text-align: center;
+  }
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  font-size: 1rem;
+  background-color: black;
+  color: #ecdbba;
+  padding: 5% 10%;
+}
+
+@media (max-width: 450px) {
+  footer {
+    font-size: 0.5rem;
+  }
+}
+
+/* Nav Bar */
+
+.nav-heading {
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.nav-user {
+  color: white;
+  margin: auto 20px 0;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.dropbtn {
+  background-color: #35363a;
+  color: white;
+  padding: 0.8rem;
+  font-size: 0.8rem;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgb(0, 0, 0);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 10px 16px;
+  text-decoration: none;
+  width: 200px;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+  text-decoration:none;
+  cursor: pointer;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+  text-decoration:none;
+  cursor: pointer;
+}
+.dropdown:hover .dropbtn {
+  background-color: white;
+  text-decoration:none;
+  cursor: pointer;
+}
+
+@media (max-width: 350px) {
+  .nav-heading {
+    font-size: 0.8rem;
+  }
+
+  .nav-user {
+    font-size: 0.8rem;
+  }
+}
+</style>
+
+</html>
