@@ -20,20 +20,6 @@ class RegisterForm(FlaskForm):
 
 
 class DonorDetailsForm(FlaskForm):
-    name = StringField(label='Name:', validators=[Length(max=30), DataRequired()])
     work = StringField(label='Work Done', validators=[Length(max=50), DataRequired()])
-    hours = IntegerField(label="No. of Hours", validators=[Length(max=24), DataRequired()])
+    hours = IntegerField(label="No. of Hours", validators=[DataRequired()])
     submit = SubmitField(label='submit')
-
-    def validate_contact(self, field):
-        if not len(field.data) == 10:
-            raise ValidationError('Invalid phone number.')
-
-        try:
-            input_number = phonenumbers.parse(field.data, "IN")
-            if not (phonenumbers.is_valid_number(input_number)):
-                raise ValidationError('Invalid phone number.')
-        except:
-            input_number = phonenumbers.parse("+91" + field.data)
-            if not (phonenumbers.is_valid_number(input_number)):
-                raise ValidationError('Invalid phone number.')

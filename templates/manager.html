@@ -180,7 +180,7 @@ thead,tbody{
         <th scope="row">{{ i[-1] }}</th>
         <td>{{ i[0]["Employee name"] }}</td>
         <td>{{ i[0]["Employee mail"] }}</td>
-        <td>{{ i[0]["No of Hours"] }}</td>
+        <td>{{ i[0]["No of hours"] }}</td>
     </tr>
     {% endfor %}
   </tbody>
@@ -205,8 +205,8 @@ thead,tbody{
         <th scope="row">{{ i[-1] }}</th>
         <td>{{ i[0]["Employee name"] }}</td>
         <td>{{ i[0]["Work Done"] }}</td>
-        <td>{{ i[0]["No of Hours"] }}</td>
-        <td><form method="POST"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="text" value="{{ i[-2] }}" name = "key" hidden><input type="submit" value="Approve" ></form></td>
+        <td>{{ i[0]["No of hours"] }}</td>
+        <td><form method="POST"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="text" value="{{ i[-2] }}" name = "key" hidden><input type="number" value="{{ i[0]['No of hours'] }}" name = "hours" hidden><input type="submit" value="Approve" ></form></td>
     </tr>
     {% endfor %}
   </tbody>
